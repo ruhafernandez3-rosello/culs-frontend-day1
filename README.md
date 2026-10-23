@@ -1,65 +1,60 @@
-# The Little Herb Garden
+Modified by: Ruha
 
-A small website for day 1 of **Frontend Development**.
+# The Little Herb Garden — Single Page Application (SPA)
 
-It is fixed by @pepe Josef Pospisil
+## Project Overview
+"The Little Herb Garden" is a fully responsive, highly accessible Single Page Application (SPA) built from scratch using pure HTML5, CSS3, JavaScript (ES6+), and the DOM API without external frameworks, libraries, or heavy dependencies. It features an interactive herb encyclopedia, dynamic JSON data loading, growth stage trackers, garden layout planners, a soil/water compatibility checker, voice search functionality, and high-contrast theme toggling.
 
-## What you need
-
-- a GitHub account
-- Git
-- an editor
-- a browser (Firefox recommended)
-- [Node.js](https://nodejs.org/) (the LTS version), which brings `npx`
-
-## Get your copy
-
-1. **Fork** this repository to your GitHub account.
-2. **Clone your fork**, not this repository:
-
-   ```sh
-   git clone https://github.com/<your-name>/culs-frontend-day1.git
-   cd culs-frontend-day1
-   ```
-
-## Run it
-
-Start a small web server in the project folder:
-
-```sh
-npx serve
-```
-
-The first time, `npx` asks whether to install `serve`. Answer `y`.
-
-Then open the address it prints, usually <http://localhost:3000>.
-Stop the server with `Ctrl+C`.
-
-Do not open `index.html` by double-clicking it. A `file://` page is not the Web.
-
-## Your mission
-
-Something is wrong. Several things, in fact.
-
-1. Inspect before you change anything: the page, the Console, the Network panel, the Inspector.
-2. Pick one problem and find out why it happens.
-3. Fix it, reload, verify.
-4. Commit that one fix, with a message that says what you fixed.
-5. Repeat.
-
-You are done when:
-
-- the Console shows no unexplained errors
-- the Network panel shows no missing files
-- every link on the page goes where it says
-- `git status` is clean, and `git push` has sent your commits to GitHub
-
-## The project
-
+## Folder Structure
 ```text
-index.html    the page
-style.css     how it looks
-app.js        what it does
-data/         the herbs, as JSON
-images/       the logo and a picture
+the_little_herb_garden_pro_v4/
+├── index.html
+├── style.css
+├── app.js
+├── data/
+│   ├── basil.json
+│   ├── spearmint.json
+│   ├── rosemary.json
+│   ├── thyme.json
+│   ├── lavender.json
+│   ├── sage.json
+│   ├── chamomile.json
+│   └── chives.json
+├── image/
+│   ├── collection-banner.jpg
+│   ├── basil.svg
+│   ├── spearmint.svg
+│   ├── rosemary.svg
+│   ├── thyme.svg
+│   ├── lavender.svg
+│   ├── sage.svg
+│   ├── chamomile.svg
+│   └── chives.svg
+└── README.md
 ```
+
+## How JSON Data is Loaded
+All herb records are stored modularly as individual JSON files inside the `data/` directory (`basil.json`, `spearmint.json`, etc.). When the application initializes, `app.js` issues asynchronous `fetch()` requests concurrently via `Promise.all()` to load all JSON files into memory. This ensures clean separation of concerns and dynamic extensibility.
+
+## How the Herb Image and Slider Work
+- **Uploaded Collection Image:** Displayed prominently at the top of the homepage (`index.html`) with proper responsive sizing, lazy loading, descriptive `alt` text, and the required caption: *“Our Herb Collection — Fresh from The Little Herb Garden.”*
+- **Hero Slider / Carousel:** Built in `app.js`, it automatically cycles through featured herbs every 4 seconds with smooth CSS transitions. Users can also navigate using previous/next arrow buttons or pagination dots. Hovering over the slider pauses auto-scrolling for better readability.
+
+## Voice Search Functionality
+Powered by the browser's native Web Speech API (`SpeechRecognition` / `webkitSpeechRecognition`), users can click the **🎤 Voice Search** button and speak natural language commands such as:
+- *"Show me basil"*
+- *"Find perennial herbs"*
+- *"Annual"*
+
+The application listens to the voice input, automatically switches to the Herbs tab, parses keywords, applies category filters, and updates the search query instantly.
+
+## Accessibility Features
+- **Semantic HTML5 Elements:** Proper usage of `<header>`, `<main>`, `<section>`, `<article>`, `<footer>`, and `<table>`.
+- **ARIA Attributes & Roles:** Tablists (`role="tablist"`), modals (`role="dialog"`), live regions (`aria-live="polite"`), and explicit button labels.
+- **Keyboard Navigation:** Full support for `Tab`, `Enter`, and `Space` key interaction across cards, tabs, and modals.
+- **High Contrast & Theme Toggle:** A built-in theme toggle supports high-contrast dark/light mode switching.
+- **Screen Reader Support:** Descriptive alternative text (`alt`) for all images and skip-to-content links.
+
+## How to Run the Project
+1. Extract the downloaded ZIP archive.
+2. Open `index.html` directly in any modern web browser (Chrome, Edge, Safari, Firefox), or run it locally via a development server (such as VS Code Live Server) for optimal asynchronous `fetch()` support.
